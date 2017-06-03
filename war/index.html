@@ -53,13 +53,13 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">Intro</a>
+                        <a class="page-scroll" href="#adressbuch">Adressbuch</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#download">Adressbuch</a>
+                        <a class="page-scroll" href="#eintragen">In Adressbuch eintragen</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Kontakt</a>
+                        <a class="page-scroll" href="#kontakt">Kontakt</a>
                     </li>
                 </ul>
             </div>
@@ -75,8 +75,9 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h1 class="brand-heading">MyBook</h1>
-                        <p class="intro-text">Trage dich in meinem Adressbuch ein</p>
-                        <a href="#about" class="btn btn-circle page-scroll">
+                        <p class="intro-text">Das MyBook ist ein Projekt für das Wahlfach Cloud Computing</p>
+                		<p class="intro-text">Alle können sich in dieses Adressbuch eintragen</p>
+                        <a href="#adressbuch" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
                     </div>
@@ -85,32 +86,109 @@
         </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="container content-section text-center">
+    <!-- Adressbuch Section -->
+    <section id="adressbuch" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2>MyBook Adressbuch</h2>
-                <p>Das MyBook ist ein Projekt für das Wahlfach Cloud Computing</p>
-                <p>Alle können sich in dieses Adressbuch eintragen</p>
-                <p></p>
+                <h2>Adressbuch</h2>
+                <p class="intro-text">Hier sind alle Leute aus dem Adressbuch aufgelistet</p>
+                <form class="form-horizontal" action="#adressbuch" method="post">
+						<table class="table table-hover" width="100%">
+						  <thead>
+						    <tr>
+						    	<th>Box</th>
+						    	<th>Vorname</th>
+						    	<th>Nachname</th>
+						    	<th class="visible-md visible-lg">Strasse</th>
+						    	<th class="visible-md visible-lg">Stadt</th>
+						    	<th class="visible-md visible-lg">PLZ</th>
+						    	<th class="visible-md visible-lg">Land</th>
+						    	<th>Telefonnummer</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						  	<REPEAT ID="Adressen">
+						    	<tr>
+						    		<td><input ID="Checkbox" type="checkbox" name="address" value="value" /></td>
+						    		<td><REPLACE ID="Vorname">Vorname</REPLACE></td>
+						    		<td><REPLACE ID="Nachname">Nachname</REPLACE></td>
+						    		<td class="visible-md visible-lg"><REPLACE ID="Strasse">Strasse</REPLACE></td>
+						    		<td class="visible-md visible-lg"><REPLACE ID="Stadt">Stadt</REPLACE></td>
+						    		<td class="visible-md visible-lg"><REPLACE ID="PLZ">PLZ</REPLACE></td>
+						    		<td class="visible-md visible-lg"><REPLACE ID="Land">Land</REPLACE></td>
+						    		<td><REPLACE ID="Telefonnummer">Telefonnummer</REPLACE></td>
+						    	</tr>
+						    </REPEAT>
+						  </tbody>
+						</table>
+					    <button type="submit" class="page-scroll btn btn-default btn-xl sr-button">Löscht den ausgewählten Eintrag</button>
+                    </form>
             </div>
         </div>
     </section>
 
-    <!-- Download Section -->
-    <section id="download" class="content-section text-center">
+    <!-- Eintragen Section -->
+    <section id="eintragen" class="content-section text-center">
         <div class="download-section">
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
-                    <h2>Adressbuch</h2>
-                    <p>Hier sind alle Leute aus dem Adressbuch aufgelistet</p>
+                    <h2>Trage dich hier ein</h2>
+                    <form class="form-horizontal" action="#adressbuch" method="post">
+					  <div class="form-group">
+					    <label for="inputVorname" class="col-sm-2 control-label">Vorname</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="inputVorname" id="inputVorname" placeholder="Vorname"></input>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputNachname" class="col-sm-2 control-label">Nachname</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="inputNachname" id="inputNachname" placeholder="Nachname"></input>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputStrasse" class="col-sm-2 control-label">Strasse</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="inputStrasse" id="inputStrasse" placeholder="Strasse"></input>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputStadt" class="col-sm-2 control-label">Stadt</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="inputStadt" id="inputStadt" placeholder="Stadt"></input>
+					    </div>
+					  </div> 
+					  <div class="form-group">
+					    <label for="inputPLZ" class="col-sm-2 control-label">PLZ</label>
+					    <div class="col-sm-10">
+					      <input type="number" class="form-control" name="inputPLZ" id="inputPLZ" placeholder="PLZ"></input>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputLand" class="col-sm-2 control-label">Land</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" name="inputLand" id="inputLand" placeholder="Land"></input>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="inputTelefonnummer" class="col-sm-2 control-label">Telefonnummer</label>
+					    <div class="col-sm-10">
+					      <input type="number" class="form-control" name="inputTelefonnummer" id="inputTelefonnummer" placeholder="Telefonnummer"></input>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+					      <button type="submit" class="btn btn-primary btn-xl page-scroll">Füge Adresse zum Adressbuch hinzu</button>
+					    </div>
+					  </div>
+					</form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="container content-section text-center">
+    <!-- Kontakt Section -->
+    <section id="kontakt" class="container content-section text-center">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Kontakt</h2>
