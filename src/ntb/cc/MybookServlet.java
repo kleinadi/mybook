@@ -23,7 +23,9 @@ import com.ibm.hamlet.Hamlet;
 public class MybookServlet extends Hamlet {
 
 	private static final long serialVersionUID = 5264892082158101750L;
+	
 	private static Logger logger = Logger.getLogger(MybookServlet.class.getName());
+	
 	public static ArrayList<Adresse> adressen = new ArrayList<Adresse>();
 
 	private void storeAdresse(String vorname, String nachname, String strasse, String stadt, String plz, String land, String telefonnummer) {
@@ -39,15 +41,23 @@ public class MybookServlet extends Hamlet {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		datastore.put(sensorData);
 
-		logger.debug("Adresse wurde in die Google Datenbank geladen");
-	} // storeAddress
+	}
+
+	private void deleteAdresse(int arrayPosition) {
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		datastore.delete(adressen.get(arrayPosition).entity.getKey());
+	}
+
+	public void init() {
+		BasicConfigurator.configure();
+		logger.debug("init");
+	}
 
 	private void readAdresse() {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Key adresseDataKey = KeyFactory.createKey("Adressen", "MyBook");
 		Query query = new Query("Adresse", adresseDataKey).addSort("vorname", Query.SortDirection.ASCENDING);
 		
-
 		List<Entity> aktuelleAdressen = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
 
 		adressen.clear();
@@ -63,23 +73,14 @@ public class MybookServlet extends Hamlet {
 
 			Adresse adresse = new Adresse(vorname, nachname, strasse, stadt, plz, land, telefonnummer,
 					aktuelleAdresse);
+			
 			adressen.add(adresse);
-		} // for
-	} // readComments
-
-	private void deleteAdresse(int arrayPosition) {
-		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		datastore.delete(adressen.get(arrayPosition).entity.getKey());
+		}
 	}
 
-	public void init() {
-		BasicConfigurator.configure();
-		logger.debug("init");
-	} // init
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException {
 		try {
-			logger.debug("doPost wurde ausgeführt");
 
 			String vorname = req.getParameter("inputVorname");
 			String nachname = req.getParameter("inputNachname");
@@ -94,24 +95,21 @@ public class MybookServlet extends Hamlet {
 
 			if (vorname != null && nachname != null && strasse != null && stadt != null && plz != null && land != null && telefonnummer != null) {
 				storeAdresse(vorname, nachname, strasse, stadt, plz, land, telefonnummer);
-				logger.debug("Neue Adresse");
-			} // if
+			}
 			else if (person[0] != "") {
-				logger.debug("in els if schleife");
 				for (String element : person) {
-					logger.debug("do Post delete" + element);
 					deleteAdresse(Integer.parseInt(element));
 				}
 
 			} else {
-				logger.debug("do Post ohne Parameter");
+				logger.debug("else");
 			}
 			doGet(req, res);
 		} catch (Exception e) {
-			logger.error("catch", e);
-		} // try
+			logger.error("error", e);
+		}
 
-	} // doPost
+	}
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException {
 		try {
@@ -119,7 +117,7 @@ public class MybookServlet extends Hamlet {
 			ExHamletHandler handler = new MyBookHandler(this, adressen);
 			serveDoc(req, res, "index.html", handler);
 		} catch (Exception e) {
-			logger.error("", e);
-		} // try
-	} // doGet
+			logger.error("error", e);
+		}
+	}
 }

@@ -15,16 +15,16 @@ public class MyBookHandler extends ExHamletHandler {
 	public MyBookHandler(Hamlet hamlet, ArrayList<Adresse> adressen) {
 		super(hamlet);
 		this.adressen = adressen;
-	} // GuestBookHandler
+	} 
 
 	public int getAdressenRepeatCount(String id, String name, Attributes atts) {
 		i++;
 		return adressen.size();
-	} // getCommentsRepeatCount
+	} 
 
 	public String getVornameReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).vorname.toString();
-	} // getDateReplacement
+	} 
 
 	public String getNachnameReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).nachname.toString();
@@ -47,7 +47,7 @@ public class MyBookHandler extends ExHamletHandler {
 	}
 
 	public String getTelefonnummerReplacement(String id, String name, Attributes atts) {
-		// return addresses.get(i - 1).entity.getKey().toString();
+		
 		return adressen.get(i).telefonnummer.toString();
 	}
 

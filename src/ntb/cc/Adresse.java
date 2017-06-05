@@ -2,6 +2,7 @@ package ntb.cc;
 
 import java.io.Serializable;
 
+// Klasse Adresse
 import com.google.appengine.api.datastore.Entity;
 
 public class Adresse implements Serializable {
