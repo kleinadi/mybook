@@ -3,31 +3,31 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
 
     <title>MyBook</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
 
     <!-- Theme CSS -->
-    <link href="css/grayscale.min.css" rel="stylesheet">
+    <link href="css/grayscale.min.css" rel="stylesheet"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif]--> 
 
 </head>
 
@@ -93,7 +93,7 @@
                 <h2>Adressbuch</h2>
                 <p class="intro-text">Hier sind alle Leute aus dem Adressbuch aufgelistet</p>
                 <form class="form-horizontal" action="#adressbuch" method="post">
-						<table class="table table-hover" width="100%">
+						<table class="table table-hover" style="color:grey;" width="100%">
 						  <thead>
 						    <tr>
 						    	<th>Box</th>
@@ -109,7 +109,7 @@
 						  <tbody>
 						  	<REPEAT ID="Adressen">
 						    	<tr>
-						    		<td><input ID="Checkbox" type="checkbox" name="address" value="value" /></td>
+						    		<td><input ID="Checkbox" type="checkbox" name="adressen" value="value" /></td>
 						    		<td><REPLACE ID="Vorname">Vorname</REPLACE></td>
 						    		<td><REPLACE ID="Nachname">Nachname</REPLACE></td>
 						    		<td class="visible-md visible-lg"><REPLACE ID="Strasse">Strasse</REPLACE></td>
@@ -133,7 +133,7 @@
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
                     <h2>Trage dich hier ein</h2>
-                    <form class="form-horizontal" action="#adressbuch" method="post">
+                    <form class="form-horizontal" action="/mybook" method="post">
 					  <div class="form-group">
 					    <label for="inputVorname" class="col-sm-2 control-label">Vorname</label>
 					    <div class="col-sm-10">

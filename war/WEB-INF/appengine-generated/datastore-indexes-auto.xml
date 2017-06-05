@@ -1,0 +1,10 @@
+<!-- Indices written at Mon, 5 Jun 2017 16:34:45 CEST -->
+
+<datastore-indexes>
+
+    <!-- Used 1 time in query history -->
+    <datastore-index kind="Adresse" ancestor="true" source="auto">
+        <property name="vorname" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>

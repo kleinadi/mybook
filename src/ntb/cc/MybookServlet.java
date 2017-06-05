@@ -27,8 +27,8 @@ public class MybookServlet extends Hamlet {
 	public static ArrayList<Adresse> adressen = new ArrayList<Adresse>();
 
 	private void storeAdresse(String vorname, String nachname, String strasse, String stadt, String plz, String land, String telefonnummer) {
-		Key addressDataKey = KeyFactory.createKey("Adressen", "MyBook");
-		Entity sensorData = new Entity("Adresse", addressDataKey);
+		Key adresseDataKey = KeyFactory.createKey("Adressen", "MyBook");
+		Entity sensorData = new Entity("Adresse", adresseDataKey);
 		sensorData.setProperty("vorname", vorname);
 		sensorData.setProperty("nachname", nachname);
 		sensorData.setProperty("strasse", strasse);
@@ -42,29 +42,27 @@ public class MybookServlet extends Hamlet {
 		logger.debug("Adresse wurde in die Google Datenbank geladen");
 	} // storeAddress
 
-	private void readAdresse(String searchKey) {
+	private void readAdresse() {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		Key addressDataKey = KeyFactory.createKey("Adressen", "MyBook");
-		Query query = new Query("Adresse", addressDataKey).addSort("vorname", Query.SortDirection.ASCENDING);
-		if (searchKey != null) {
-			query.setFilter(new Query.FilterPredicate("vorname", Query.FilterOperator.EQUAL, searchKey));
-		}
+		Key adresseDataKey = KeyFactory.createKey("Adressen", "MyBook");
+		Query query = new Query("Adresse", adresseDataKey).addSort("vorname", Query.SortDirection.ASCENDING);
+		
 
-		List<Entity> curAddresses = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
+		List<Entity> aktuelleAdressen = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(10));
 
 		adressen.clear();
 
-		for (Entity curAddress : curAddresses) {
-			String vorname = "" + curAddress.getProperty("vorname");
-			String nachname = "" + curAddress.getProperty("nachname");
-			String strasse = "" + curAddress.getProperty("strasse");
-			String stadt = "" + curAddress.getProperty("stadt");
-			String plz = "" + curAddress.getProperty("plz");
-			String land = "" + curAddress.getProperty("land");
-			String telefonnummer = "" + curAddress.getProperty("telefonnummer");
+		for (Entity aktuelleAdresse : aktuelleAdressen) {
+			String vorname = "" + aktuelleAdresse.getProperty("vorname");
+			String nachname = "" + aktuelleAdresse.getProperty("nachname");
+			String strasse = "" + aktuelleAdresse.getProperty("strasse");
+			String stadt = "" + aktuelleAdresse.getProperty("stadt");
+			String plz = "" + aktuelleAdresse.getProperty("plz");
+			String land = "" + aktuelleAdresse.getProperty("land");
+			String telefonnummer = "" + aktuelleAdresse.getProperty("telefonnummer");
 
 			Adresse adresse = new Adresse(vorname, nachname, strasse, stadt, plz, land, telefonnummer,
-					curAddress);
+					aktuelleAdresse);
 			adressen.add(adresse);
 		} // for
 	} // readComments
@@ -89,15 +87,17 @@ public class MybookServlet extends Hamlet {
 			String stadt = req.getParameter("inputStadt");
 			String plz = req.getParameter("inputPLZ");
 			String land = req.getParameter("inputLand");
-			String telefonnummer = req.getParameter("inputtelefonnummer");
+			String telefonnummer = req.getParameter("inputTelefonnummer");
 
-			String[] person = req.getParameterValues("adresse");
+			String[] person = req.getParameterValues("adressen");
+			
 
 			if (vorname != null && nachname != null && strasse != null && stadt != null && plz != null && land != null && telefonnummer != null) {
 				storeAdresse(vorname, nachname, strasse, stadt, plz, land, telefonnummer);
 				logger.debug("Neue Adresse");
 			} // if
 			else if (person[0] != "") {
+				logger.debug("in els if schleife");
 				for (String element : person) {
 					logger.debug("do Post delete" + element);
 					deleteAdresse(Integer.parseInt(element));
@@ -108,18 +108,14 @@ public class MybookServlet extends Hamlet {
 			}
 			doGet(req, res);
 		} catch (Exception e) {
-			logger.error("", e);
+			logger.error("catch", e);
 		} // try
 
 	} // doPost
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException {
 		try {
-			String searchKey = req.getParameter("searchKey");
-			logger.debug("search param::::::::::" + searchKey);
-			logger.debug("doGet has been executed");
-			readAdresse(searchKey);
-			// deleteAddress();
+			readAdresse();
 			ExHamletHandler handler = new MyBookHandler(this, adressen);
 			serveDoc(req, res, "index.html", handler);
 		} catch (Exception e) {

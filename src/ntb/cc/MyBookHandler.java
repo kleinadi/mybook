@@ -17,36 +17,36 @@ public class MyBookHandler extends ExHamletHandler {
 		this.adressen = adressen;
 	} // GuestBookHandler
 
-	public int getIndirizziRepeatCount(String id, String name, Attributes atts) {
+	public int getAdressenRepeatCount(String id, String name, Attributes atts) {
 		i++;
 		return adressen.size();
 	} // getCommentsRepeatCount
 
-	public String ReplaceVorname(String id, String name, Attributes atts) {
+	public String getVornameReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).vorname.toString();
 	} // getDateReplacement
 
-	public String ReplaceNachname(String id, String name, Attributes atts) {
+	public String getNachnameReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).nachname.toString();
 	}
 
-	public String ReplaceStrasse(String id, String name, Attributes atts) {
+	public String getStrasseReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).strasse.toString();
 	}
 
-	public String ReplaceStadt(String id, String name, Attributes atts) {
+	public String getStadtReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).stadt.toString();
 	}
 
-	public String ReplacePLZ(String id, String name, Attributes atts) {
+	public String getPLZReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).plz.toString();
 	}
 
-	public String ReplaceLand(String id, String name, Attributes atts) {
+	public String getLandReplacement(String id, String name, Attributes atts) {
 		return adressen.get(i).land.toString();
 	}
 
-	public String ReplaceTelefonnummer(String id, String name, Attributes atts) {
+	public String getTelefonnummerReplacement(String id, String name, Attributes atts) {
 		// return addresses.get(i - 1).entity.getKey().toString();
 		return adressen.get(i).telefonnummer.toString();
 	}
